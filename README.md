@@ -5,14 +5,22 @@ This repo includes artifacts to run TrustID on Fabric for OpenClimate use case e
 ## Steps to setup in environment
 
 
-cd fabric-samples/test-network
-./network.sh up -ca
-./network.sh createChannel
-source setenv.sh
-./scripts/deployTID.sh
-cd scripts
-node enrollAdmin.js
-node testTrustId.js
+cd fabric-samples/test-network<br />
+
+./network.sh up -ca<br />
+
+./network.sh createChannel<br />
+
+source setenv.sh<br />
+
+./scripts/deployTID.sh<br />
+
+cd scripts<br />
+
+node enrollAdmin.js<br />
+
+node testTrustId.js<br />
+
 
 Current result 11/19/2020:
 
