@@ -8,7 +8,7 @@ CC_SRC_PATH=${3:-"NA"}
 CC_SRC_LANGUAGE=${4:-"go"}
 CC_VERSION=${5:-"1.0"}
 CC_SEQUENCE=${6:-"1"}
-CC_INIT_FCN=${7:-"NA"}
+CC_INIT_FCN='{"Args":["Init", "{\"did\":\"did:vtn:trustid:29222201b6662e5b2a07815f7f98b8653b306e3af3830dbaf2387da49ec744db\",\"controller\":\"did:vtn:trustid:29222201b6662e5b2a07815f7f98b8653b306e3af3830dbaf2387da49ec744db\",\"publicKey\":\"-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzP4bEUzWUJQh+gm9apHT6H1myWMqje4I3+F0d4NSPV8Y3HG0mOYr034fx34je9F82+YpToOO5utbQFlDTmCcI3S2hO4oNwV4xuvt+DCMm2QsYOPCy8BjMHFHiOxTVzlDNaq9YVrGeiEY6+e5e5c61y+Yi5YeaRld0RLBWkIfaQIAQyx/FgYFpzDDhxB/TznO9hiw5O5/MFqVOKFEhjT3ndXPRuHUi1F5BfidzlKzfU8G9LO4M+VLzRwnsWGsrgdyQwK8SG9RhcYwPBKMqxwdyUwwccX3DEovshPMxEdPGaj1zuJuAuJlcd504FZDSqszcTjbdSGUgivVWMv8HvRIoQIDAQAB-----END PUBLIC KEY-----\"}"]}'
 CC_END_POLICY=${8:-"NA"}
 CC_COLL_CONFIG=${9:-"NA"}
 DELAY=${10:-"3"}
@@ -41,14 +41,15 @@ if [ "$CC_SRC_PATH" = "NA" ]; then
   # short name of the known chaincode sample
   if [ "$CC_NAME" = "trustid" ]; then
     println $'\e[0;32m'trustid$'\e[0m' chaincode
-    CC_SRC_PATH="../trust-id-chaincode"
+    # CC_SRC_PATH="../trust-id-chaincode"
+    CC_SRC_PATH="../../fabric-chaincode"
   else
     fatalln "The chaincode name ${CC_NAME} is not supported by this script. Supported chaincode names are: basic, events, ledger, private, sbe, secured"
   fi
 
   # now see what language it is written in
   if [ "$CC_SRC_LANGUAGE" = "go" ]; then
-    CC_SRC_PATH="$CC_SRC_PATH/chaincode-go/"
+    CC_SRC_PATH="$CC_SRC_PATH"
   elif [ "$CC_SRC_LANGUAGE" = "java" ]; then
     CC_SRC_PATH="$CC_SRC_PATH/chaincode-java/"
   elif [ "$CC_SRC_LANGUAGE" = "javascript" ]; then
@@ -57,6 +58,8 @@ if [ "$CC_SRC_PATH" = "NA" ]; then
     CC_SRC_PATH="$CC_SRC_PATH/chaincode-typescript/"
   fi
 
+  echo "+++++++++++++++++++$CC_SRC_PATH++++++++++++"
+  echo "$(ls $CC_SRC_PATH)"
   # check that the language is available for the sample chaincode
   if [ ! -d "$CC_SRC_PATH" ]; then
     fatalln "The smart contract language \"$CC_SRC_LANGUAGE\" is not yet available for the \"$CC_NAME\" sample smart contract"
@@ -264,9 +267,9 @@ chaincodeInvokeInit() {
   # peer (if join was successful), let's supply it directly as we know
   # it using the "-o" option
   set -x
-  fcn_call='{"function":"'${CC_INIT_FCN}'","Args":[]}'
-  infoln "invoke fcn call:${fcn_call}"
-  peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CC_NAME} $PEER_CONN_PARMS --isInit -c ${fcn_call} >&log.txt
+
+  infoln "invoke fcn call:${CC_INIT_FCN}"
+  peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CC_NAME} $PEER_CONN_PARMS --isInit -c "${CC_INIT_FCN}" >&log.txt
   res=$?
   { set +x; } 2>/dev/null
   cat log.txt
