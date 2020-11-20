@@ -27,7 +27,7 @@
         "peer0": {
             "url": "grpcs://localhost:7051",
             "tlsCACerts": {
-                "path": "/Users/davidthomson/Verses/trustid-openclimate/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem"
+                "path": "../organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem"
             },
             "grpcOptions": {
                 "ssl-target-name-override": "peer0.org1.example.com"
@@ -39,11 +39,11 @@
             "url": "https://localhost:7054",
             "caName": "ca-org1",
             "tlsCACerts": {
-                "path": "/Users/davidthomson/Verses/trustid-openclimate/fabric-samples/test-network/organizations/fabric-ca/org1/tls-cert.pem"
+                "path": "../organizations/fabric-ca/org1/tls-cert.pem"
             },
             "registrar": {
-                "enrollId": "org1admin",
-                "enrollSecret": "org1adminpw"
+                "enrollId": "admin",
+                "enrollSecret": "adminpw"
             },
             "httpOptions": {
                 "verify": true
