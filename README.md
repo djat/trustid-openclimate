@@ -21,7 +21,7 @@ rm -rf wallet<br />
 node enrollAdmin.js<br />
 
 ###### add ca-tls.pem to testTrustId.js
-Open organizations/peerOrganizations/org1.example.com/connection-org1.json and copy byte64 encrypted tlsCACerts pem. Open testTrustId.js and replace `trustedRoots` tlsCACerts pem.
+Open organizations/peerOrganizations/org1.example.com/connection-org1.json and copy byte64 encrypted certificateAuthorities tlsCACerts pem. Open testTrustId.js and replace `trustedRoots` tlsCACerts pem.
 
 node testTrustId.js<br />
 

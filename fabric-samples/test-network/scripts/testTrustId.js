@@ -15,7 +15,7 @@ var config = {
     caAdmin: 'admin',
     caPassword: 'adminpw',
     tlsOptions: {
-        trustedRoots: "-----BEGIN CERTIFICATE-----\nMIICFzCCAb2gAwIBAgIUScOQL2q9Yif/A4QjHHZQ75LnHQwwCgYIKoZIzj0EAwIw\naDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK\nEwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt\nY2Etc2VydmVyMB4XDTIwMTEyMDEzMjUwMFoXDTM1MTExNzEzMjUwMFowaDELMAkG\nA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl\ncmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy\ndmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEdaHiCdcPqoQ4uOG9gprqVTck\nFOkiNRhZffFkgjTQCTiwDO6PON7FSW/qQWqbukW01t4mViuV+dvgihQ7TauslaNF\nMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE\nFJbqvKSWlsU3cY8eVggbXh+qdQ56MAoGCCqGSM49BAMCA0gAMEUCIQCS7hPlsnSg\nb6+xIr8H6MPII3zmzvImQwu1HiaKSmYcXgIgQ6JG4+sNBXxGdC5aabZyq9/ngdn/\n9gAddO9qP2TZszM=\n-----END CERTIFICATE-----\n",
+        trustedRoots: "-----BEGIN CERTIFICATE-----\nMIICFjCCAbygAwIBAgITZ46oDjFTV6JNrKvmYhdyKc3mmDAKBggqhkjOPQQDAjBo\nMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xpbmExFDASBgNVBAoT\nC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxGTAXBgNVBAMTEGZhYnJpYy1j\nYS1zZXJ2ZXIwHhcNMjAxMTIzMTcwMDAwWhcNMzUxMTIwMTcwMDAwWjBoMQswCQYD\nVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xpbmExFDASBgNVBAoTC0h5cGVy\nbGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxGTAXBgNVBAMTEGZhYnJpYy1jYS1zZXJ2\nZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASLwjs9fCeKxeMqa8edXmE/YwEp\nu3pt41SVGupRdEQw9rBTpvfO9l9e/YLM8ndxIrhBfH1qHOpsZQJrYTzqzp/go0Uw\nQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU\nGRXs11uyFuSXxu7b68e5oL9zFkQwCgYIKoZIzj0EAwIDSAAwRQIhANQWzx4PMTNv\nxC9tp2/v5XleI7FIiRYLQxnoD0uQWh+pAiAUhIX8vRZQrlEh7gzvn4LxlUHe3F3e\neHPRl5PRjNuD6Q==\n-----END CERTIFICATE-----\n",
         verify: false
     },
     mspId: 'org1MSP',
@@ -72,7 +72,7 @@ async function serviceInteraction(){
 
 // Use the wallet to make offchain interactions with your DID
 async function walletInteraction(){
-    const did = await wal.getDID("did:vtn:trustid:90b7fc4de0f28998f05d8bee7c5bce6ac327d69ed5bd381b972b267b593186ef")
+    const did = await wal.getDID("did:vtn:trustid:94532d941716c2e0aecccb888939d166fef4260b6f232477655e63aa09f58e04")
     const payload = {hello: "AWESOME PROJECT!!!"}
     await did.unlockAccount("test")
     console.log("[*] Signing payload: \n", payload)
@@ -90,7 +90,7 @@ async function main() {
     await configureNetwork()
     // await createDID()
     // await serviceInteraction()
-    /await walletInteraction()
+    await walletInteraction()
 }
 
 main().then(console.log).catch(console.log)
